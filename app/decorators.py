@@ -4,8 +4,8 @@ from flask_login import current_user
 from .models import Permission
 
 """
-自己定义两个装饰器，使用Python内置的functools库。
-如果用户不具有指定permission权限，返回403错误码，禁止访问
+Define two decorators using the functools library built into Python.
+If the user does not have the specified permission, the 403 error code is returned, and access is prohibited.
 """
 
 def permission_required(permission):
