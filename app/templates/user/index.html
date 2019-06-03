@@ -7,20 +7,20 @@
         <h4>
         Hello,
         {% if current_user.is_authenticated %}
-            {{current_user.nickname}}。{% if notice%}{{notice}}{%else%}开始你的创作，让世界认识你吧。{%endif%}
+            {{current_user.nickname}}。{% if notice%}{{notice}}{%else%}Post your own interesting stuff{%endif%}
         {% else %}
-            冒险者，为何独自徘徊，加入我们说说你的故事吧。
+            Tell your story
         {% endif %}
         </h4><br>
         {% if current_user.operation(Permission.WRITE_ARTICLES) %}
         <a href="{{url_for('user.write')}}">
             <button type="button" class="btn btn-default btn-sm">
-                <span class="glyphicon glyphicon-pencil"></span> 写文章
+                <span class="glyphicon glyphicon-pencil"></span> edit
             </button>
         </a> |
         <a href="{{ url_for('user.draft') }}">
             <button type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-file"></span> 草稿
+              <span class="glyphicon glyphicon-file"></span> draft
             </button>
         </a>
         {% endif %}
@@ -28,7 +28,7 @@
         |
         <a href="{{ url_for('admin.index') }}">
             <button type="button" class="btn btn-default btn-sm">
-              <span class="glyphicon glyphicon-cog"></span> 管理网站
+              <span class="glyphicon glyphicon-cog"></span> Admin Panel
             </button>
         </a>
         {% endif %}
