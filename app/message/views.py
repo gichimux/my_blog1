@@ -3,13 +3,13 @@ from flask import redirect, render_template, current_app, request, g, flash, url
 from flask_login import login_required, current_user
 
 from ..models import User, Conversation, Post, Permission
-from ..user.forms import SearchForm
+from ..main.forms import SearchForm
 from .. import db
 from . import message
 from .forms import LetterForm
 
 
-# 用户最后一次访问时间,全文搜索
+# User last visit time, full text search
 @message.before_request
 def before_request():
     if current_user.is_authenticated:
@@ -24,7 +24,6 @@ def comment_message():
     user = User.query.filter_by(id=current_user.id).first()
     all_post = user.posts.order_by(Post.timestamp.desc()).all()
     posts = [post for post in all_post if post.draft == False]
-    # 每篇文章的评论，赞是一个列表集合
     i = [post.comments for post in posts]
     x, comments = 0, []
     if i != []:
@@ -43,7 +42,7 @@ def comment_message():
     follows = [f for f in user.followers if f.unread is True]
 
     return render_template('message/comment_message.html',
-                           title='消息',
+                           title='Message',
                            like=len(likes),
                            follow=len(follows),
                            comments=comments)
@@ -73,7 +72,7 @@ def like_message():
     follows = [f for f in user.followers if f.unread is True]
 
     return render_template('message/like_message.html',
-                           title='消息',
+                           title='Message',
                            likes=likes,
                            comments=len(comments),
                            follow=len(follows))
@@ -104,11 +103,11 @@ def follow_message():
         f.unread = False
 
     return render_template('message/follow_message.html',
-                           title='消息',
+                           title='Message',
                            comments=len(comments),
                            likes=len(likes),
                            follows=follows)
-# 私信箱
+
 @message.route('/letter')
 @login_required
 def letter_message():
@@ -143,7 +142,7 @@ def letter_message():
         Conversation.to_user_id == current_user.id).count()
 
     return render_template("message/letter_message.html",
-                           title='消息',
+                           title='Message',
                            comments=len(comments),
                            likes=len(likes),
                            follows=len(follows),
@@ -151,7 +150,7 @@ def letter_message():
                            conversations=conversations,
                            message_count=message_count)
 
-# 读写私信
+
 @message.route('/write_letter/<int:id>', methods=['GET','POST'])
 @login_required
 def write_letter(id):
@@ -176,16 +175,16 @@ def write_letter(id):
                                     letter=letter,
                                     unread=True)
         db.session.add(conversation)
-        flash('发送私信成功。')
+        flash('Message sent')
         return redirect(url_for('message.write_letter',id=id))
     return render_template('message/conversation.html',
-                           title='消息',
+                           title='Message',
                            receive_conv = receive_conv,
                            send_conv = send_conv,
                            all = max(len(receive_conv),len(send_conv)),
                            form=form)
 
-# 删除会话
+
 @message.route('delete_letter/<int:id>')
 @login_required
 def delete_letter(id):
@@ -193,6 +192,6 @@ def delete_letter(id):
                                 id=id,
                                 to_user_id=current_user.id).first_or_404()
     db.session.delete(conversation)
-    flash('你已删除此条私信。')
+    flash('You have deleted this private message.')
 
     return redirect(url_for('message.letter_message'))

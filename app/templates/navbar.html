@@ -1,0 +1,50 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="{{ url_for('main.index') }}"><span class="glyphicon glyphicon-home"></span>My Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li> -->
+        {% if current_user.is_authenticated %}
+        <li><a href="{{url_for('main.follows', nickname=current_user.nickname)}}">User</a></li>
+        <li style="color:white; padding: 15px;">{{current_user.nickname}}</li>
+        <li><a href="{{ url_for('auth.logout')}}">Sign out</a></li>
+        <a><span class="glyphicon glyphicon-pencil"></span> Write a post</a>
+        {% else %}
+        <li><a href="{{url_for('auth.register')}}">Sign In</a></li>
+        {%endif%}
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            inbox
+          </a>
+          {% if current_user.is_authenticated %}
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{{ url_for('message.comment_message') }}">Messages</a>
+            <a class="dropdown-item" href="{{ url_for('main.users', nickname=current_user.nickname) }}"><span class="glyphicon glyphicon-user"></span> {{User.nickname}}</a>
+            <a class="dropdown-item" href="{{ url_for('auth.change_password') }}"><span class="glyphicon glyphicon-refresh"></span> Change password</a>
+            <a class="dropdown-item" href="{{ url_for('auth.logout') }}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+            {% else %}
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ url_for('auth.login') }}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+            {%endif%}
+        </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0" method="post" action="{{url_for('main.search')}}" role="search">
+        {{ g.search_form.hidden_tag() }}
+        {{g.search_form.search(class="form-control")}}
+        <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> -->
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>

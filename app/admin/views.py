@@ -7,11 +7,10 @@ from .. import db
 from ..models import Comment, Post, Admin, User
 from . import admin
 from ..decorators import admin_required
-from ..user.forms import SearchForm
+from ..main.forms import SearchForm
 from .forms import NoticeForm
 
 
-# 用户最后一次访问时间,全文搜索
 @admin.before_request
 def before_request():
     if current_user.is_authenticated:
@@ -20,15 +19,13 @@ def before_request():
         db.session.commit()
     g.search_form = SearchForm()
 
-
-# 管理员页面
 @admin.route('/')
 @admin_required
 @login_required
 def index():
 
     return render_template('admin/admin.html',
-                           title='管理')
+                           title='management')
 
 @admin.route('/admincomment/')
 @admin_required
@@ -45,8 +42,8 @@ def admin_comment():
                            pagination=pagination,
                            page=page,
                            nums=len(comments),
-                           title='管理评论')
-# 恢复评论
+                           title='admin review')
+
 @admin.route('/adminrecover/<int:id>')
 @login_required
 def admin_recover(id):
@@ -54,7 +51,7 @@ def admin_recover(id):
     comment.disabled = False
     db.session.add(comment)
     return redirect(url_for('admin.admin_comment'))
-# 删除评论
+
 @admin.route('/admindelate/<int:id>')
 @login_required
 def admin_delate(id):
@@ -78,9 +75,8 @@ def admin_post():
                            pagination=pagination,
                            page=page,
                            nums = len(posts),
-                           title='管理文章')
+                           title='Manage Articles')
 
-# 恢复文章
 @admin.route('/recoverpost/<int:id>')
 @login_required
 def recover_post(id):
@@ -88,7 +84,7 @@ def recover_post(id):
     post.disabled = False
     db.session.add(post)
     return redirect(url_for('admin.admin_post'))
-# 删除文章
+
 @admin.route('/delatepost/<int:id>')
 @login_required
 def delate_post(id):
@@ -97,7 +93,7 @@ def delate_post(id):
     db.session.add(post)
     return redirect(url_for('admin.admin_post'))
 
-# 添加公告
+
 @admin.route('/notice', methods=['GET','POST'])
 @login_required
 @admin_required
@@ -113,10 +109,9 @@ def add_notice():
         db.session.add(admin)
         return redirect(url_for('admin.index'))
     return render_template('admin/admin_notice.html',
-                           title='网站公告',
+                           title='blog announcement',
                            form=form)
 
-# 获取所有用户
 @admin.route('/users')
 @login_required
 @admin_required
@@ -124,5 +119,5 @@ def admin_user():
     users = User.query.all()
 
     return render_template('admin/admin_user.html',
-                           title='所有用户',
+                           title='All users',
                            users=users)

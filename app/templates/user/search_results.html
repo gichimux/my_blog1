@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>"{{query}}"的搜索结果：</h3><hr>
+<h3>"{{query}}" Search Results：</h3><hr>
 {% for post in posts %}
 {% if post.draft == False %}
 {% include '_posts.html' %}

@@ -4,4 +4,4 @@ from flask_pagedown.fields import PageDownField
 
 
 class LetterForm(FlaskForm):
-    body = PageDownField('评论', validators=[DataRequired()])
+    body = PageDownField('Comment', validators=[DataRequired()])

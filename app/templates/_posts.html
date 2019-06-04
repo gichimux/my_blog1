@@ -1,8 +1,8 @@
 <div class="outline">
-    <a href="{{url_for('user.users', nickname=post.author.nickname)}}">
+    <a href="{{url_for('main.users', nickname=post.author.nickname)}}">
         <img class="images" src="{{post.author.gravatar(size=40)}}">
     </a>
-    <a href="{{url_for('user.users',nickname=post.author.nickname)}}">
+    <a href="{{url_for('main.users',nickname=post.author.nickname)}}">
         {{post.author.nickname}}
     </a><i>{{ moment(post.timestamp).fromNow() }}发布</i>
      <i class="right">Viewed by：<span class="badge">{{ post.view_num }}</span></i>
@@ -11,7 +11,7 @@
 </div>
 <div class="art_outline">
     <div class="title">
-        <a href="{{url_for('user.post', id=post.id)}}"><h4>{{post.title}}</h4></a>
+        <a href="{{url_for('main.post', id=post.id)}}"><h4>{{post.title}}</h4></a>
     </div>
     <div>
         {% if post.body_html %}
@@ -22,11 +22,11 @@
     </div>
     <p>
         {% if current_user == post.author %}
-        <a href="{{ url_for('user.edit', id=post.id) }}">
+        <a href="{{ url_for('main.edit', id=post.id) }}">
             <span> Edit>> </span>
         </a>
         {% elif current_user.is_administrator() %}
-        <a href="{{ url_for('user.edit', id=post.id) }}">
+        <a href="{{ url_for('main.edit', id=post.id) }}">
             <span>Edit【Admin】</span>
         </a>
         {% endif %}

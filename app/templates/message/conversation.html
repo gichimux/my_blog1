@@ -36,8 +36,8 @@
     <div class="col-md-9 column">
         {% if send_conv %}
 
-        <a href="{{ url_for('message.letter_message') }}">返回私信列表</a>
-        <span class="letter"><b>与 {{ send_conv[0].to_user.nickname }} 的对话</b></span><hr>
+        <a href="{{ url_for('message.letter_message') }}">Return To private Message list</a>
+        <span class="letter"><b> {{ send_conv[0].to_user.nickname }} Dialogue</b></span><hr>
 
         {% endif %}
         <ul class="list-group">
@@ -90,7 +90,7 @@
             <span style="color: red;">[{{error}}]</span>
         {% endfor %}<br>
         <p>
-            <input class="btn btn-default right" type="submit" value="发送">
+            <input class="btn btn-default right" type="submit" value="Submit">
         </p>
         </form>
     </div>

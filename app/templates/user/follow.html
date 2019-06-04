@@ -6,23 +6,23 @@
     <div class="col-md-8 column">
         <ul class="nav nav-tabs">
             <li {% if show_followed %}class="active"{% endif %}>
-                 <a href="{{ url_for('user.show_follower',nickname=user.nickname) }}">粉丝</a>
+                 <a href="{{ url_for('main.show_follower',nickname=user.nickname) }}">Followers</a>
             </li>
             <li {% if not show_followed %}class="active"{% endif %}>
-                 <a href="{{ url_for('user.show_followed',nickname=user.nickname) }}">关注</a>
+                 <a href="{{ url_for('main.show_followed',nickname=user.nickname) }}">Follows</a>
             </li>
         </ul>
         <br>
         {% for follow in follows %}
         <ul class="list-group">
             <li class="list-group-item">
-                <a href="{{ url_for('user.users',nickname=follow.user.nickname) }}">{{ follow.user.nickname }}</a>
+                <a href="{{ url_for('main.users',nickname=follow.user.nickname) }}">{{ follow.user.nickname }}</a>
                 <span class="right">{{ moment(follow.timestamp).fromNow() }}</span>
                 {% if current_user.operation(Permission.FOLLOW) and user != current_user %}
                     {% if not current_user.is_following(user) %}
-                    <a class="right" href="{{ url_for('user.follow', nickname=user.nickname) }}">关注</a>
+                    <a class="right" href="{{ url_for('main.follow', nickname=user.nickname) }}">Attention</a>
                     {% else %}
-                    <a class="right" href="{{ url_for('user.unfollow', nickname=user.nickname) }}">取消关注</a>
+                    <a class="right" href="{{ url_for('main.unfollow', nickname=user.nickname) }}">Unsubscribe</a>
                     {% endif %}
                 {% endif %}
             </li>
@@ -37,13 +37,13 @@
     <div class="col-md-4 column">
         <div class="panel panel-success">
             <div class="panel-heading">
-                <h4 class="panel-title">推荐文章</h4>
+                <h4 class="panel-title">Reccomend Article</h4>
             </div>
             <div class="panel-body">
                 {% if current_user == user %}
                 {% for post in current_user.followed_posts %}
                 {% if not post.disabled and not post.draft %}
-                <a href="{{ url_for('user.post', id=post.id) }}">
+                <a href="{{ url_for('main.post', id=post.id) }}">
                     {{ post.title }}
                 </a><hr>
                 {% endif %}
@@ -51,7 +51,7 @@
                 {% else %}
                 {% for post in user.posts %}
                 {% if not post.disabled and not post.draft %}
-                <a href="{{ url_for('user.post', id=post.id) }}">
+                <a href="{{ url_for('main.post', id=post.id) }}">
                     {{ post.title }}
                 </a><hr>
                 {% endif %}

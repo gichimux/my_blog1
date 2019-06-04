@@ -4,24 +4,24 @@
 <div class="row clearfix">
     <div class="col-md-3 column">
         <a href="{{ url_for('message.letter_message') }}" class="list-group-item btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-envelope"></span> 私信
+          <span class="glyphicon glyphicon-envelope"></span> Contact
         </a><hr>
         <a href="#" class="list-group-item active">
-            <span class="glyphicon glyphicon-comment"></span> 评论
+            <span class="glyphicon glyphicon-comment"></span> Comment
         </a>
         <a href="{{ url_for('message.like_message') }}" class="list-group-item">
-            <span class="badge">{{ like }}</span><span class="glyphicon glyphicon-thumbs-up"></span> 点赞
+            <span class="badge">{{ like }}</span><span class="glyphicon glyphicon-thumbs-up"></span> Like
         </a>
         <a href="{{ url_for('message.follow_message') }}" class="list-group-item">
-            <span class="badge">{{ follow }}</span><span class="glyphicon glyphicon-star"></span> 关注
+            <span class="badge">{{ follow }}</span><span class="glyphicon glyphicon-star"></span> Follow
         </a>
 
     </div>
 
     <div class="col-md-9 column">
-        最新评论<hr>
+       Latest Comment<hr>
         {% if comments == [] %}
-        <h4>啊哦，没有新的评论哦。</h4>
+        <h4>No new Comments</h4>
         {% else %}
         <ul class="list-group">
             {% for comment in comments %}
@@ -29,7 +29,7 @@
                 <div>
                     <a href="{{ url_for('user.users', nickname=comment.author.nickname) }}">
                         {{ comment.author.nickname }}
-                    </a>评论了文章
+                    </a>Commented on Your article
                     <a href="{{ url_for('user.post', id=comment.post_id) }}">
                         《{{ comment.post.title }}》
                     </a>

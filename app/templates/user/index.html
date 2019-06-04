@@ -13,12 +13,12 @@
         {% endif %}
         </h4><br>
         {% if current_user.operation(Permission.WRITE_ARTICLES) %}
-        <a href="{{url_for('user.write')}}">
+        <a href="{{url_for('main.write')}}">
             <button type="button" class="btn btn-default btn-sm">
                 <span class="glyphicon glyphicon-pencil"></span> edit
             </button>
         </a> |
-        <a href="{{ url_for('user.draft') }}">
+        <a href="{{ url_for('main.draft') }}">
             <button type="button" class="btn btn-default btn-sm">
               <span class="glyphicon glyphicon-file"></span> draft
             </button>
@@ -42,7 +42,7 @@
 {% endif %}
 {% endfor %}
 <div class="pagination">
-{{ page.pages(pagination, 'user.index') }}
+{{ page.pages(pagination, 'main.index') }}
 </div>
 {% endif %}
 {% endblock %}

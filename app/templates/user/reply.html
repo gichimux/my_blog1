@@ -5,7 +5,7 @@
 <hr>
 <div>
     <img src="{{comment.author.gravatar(size=30)}}">
-    <a href="{{url_for('user.users', nickname=comment.author.nickname)}}">
+    <a href="{{url_for('main.users', nickname=comment.author.nickname)}}">
         {{ comment.author.nickname }}
     </a>:
 </div>
@@ -26,7 +26,7 @@
     <span style="color: red;">[{{error}}]</span>
 {% endfor %}<br>
 <p>
-    <input class="btn btn-default" type="submit" value="发表">
+    <input class="btn btn-default" type="submit" value="Publish">
 </p>
 </form>
 {% endblock %}

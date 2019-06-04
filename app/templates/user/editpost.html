@@ -6,16 +6,16 @@
 {% endblock %}
 
 {% block content %}
-<h1>编辑文章</h1><hr>
+<h1>Edit Article</h1><hr>
 <form action="" method="post" name="editpost">
     {{form.hidden_tag()}}
 
-        标题<br>
+        Title<br>
         {{form.title(class="form-control")}}<br>
         {% for error in form.title.errors %}
             <span style="color: red;">[{{error}}]</span>
         {% endfor %}<br>
-        文章<br>
+        Article<br>
         <div id="editormd">
             {{form.body(style="display:none;")}}<br>
             {% for error in form.body.errors %}
@@ -35,15 +35,15 @@
 
 {% block scripts %}
 {{super()}}
-<script src="{{ url_for('static',filename='editormd/editormd.min.js') }}"></script>
+<script src="{{ url_for('static',filename='editor/editormd.js') }}"></script>
     <script type="text/javascript">
         var testEditor;
         $(function () {
-            testEditor = editormd("editormd", {
+            testEditor = editor("editor", {
                 syncScrolling: "single",
                 width: "100%",
                 height: "550px",
-                path: "{{ url_for('static',filename='editormd/lib/') }}"
+                path: "{{ url_for('static',filename='editor/lib/') }}"
             });
         });
     </script>

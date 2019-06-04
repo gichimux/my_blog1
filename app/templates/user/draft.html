@@ -15,8 +15,8 @@
                     {{ draft.body | truncate(100) }}
                 {% endif %}
             </p>
-            <a class="taga" href="{{ url_for('user.delete_draft',id=draft.id) }}"><span class="label label-danger">删除</span></a>
-            <a class="taga" href="{{ url_for('user.edit',id=draft.id) }}"><span class="label label-primary">编辑</span></a>
+            <a class="taga" href="{{ url_for('main.delete_draft',id=draft.id) }}"><span class="label label-danger">删除</span></a>
+            <a class="taga" href="{{ url_for('main.edit',id=draft.id) }}"><span class="label label-primary">编辑</span></a>
         </li><hr>
     </ol>
 {% endif %}

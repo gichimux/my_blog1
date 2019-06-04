@@ -3,13 +3,13 @@
 
 {% block content %}
 <h3>
-    <i>管理文章 <span class="badge">{{ nums }}</span></i> |
-    <a href="{{ url_for('admin.admin_comment') }}">管理评论</a>
+    <i>Manage Articles <span class="badge">{{ nums }}</span></i> |
+    <a href="{{ url_for('admin.admin_comment') }}">Review</a>
 </h3><hr>
 {% for post in posts %}
 <div>
     {% if post.disabled %}
-    <i><font color="#d2691e">这篇文章或者草稿已被删除。</font></i><br>
+    <i><font color="#d2691e">This Article has been deleted</font></i><br>
     {% include "_posts.html" %}
     {% endif %}
     {% if not post.disabled %}
@@ -19,10 +19,10 @@
 <div>
     {% if post.disabled %}
     <a class="btn btn-default btn-xs" href="{{ url_for('admin.recover_post',id=post.id,
-        page=page) }}">恢复</a>
+        page=page) }}">Recover Post</a>
     {% else %}
     <a class="btn btn-danger btn-xs" href="{{ url_for('admin.delate_post',id=post.id,
-        page=page) }}">删除</a>
+        page=page) }}">Delete</a>
     {% endif %}
 </div><hr>
 {% endfor %}

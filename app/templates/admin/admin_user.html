@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>所有用户</h3><hr>
+<h3>All users</h3><hr>
 {% if users %}
 {% for user in users %}
     <ul class="list-group">
@@ -18,9 +18,9 @@
                             <h4>{{ user.nickname }}</h4>
                         </a>
                         {% if user.about_me %}<p>{{user.about_me}}</p>{% endif %}
-                        {% if user.last_seen %}<p><i>最后离开时间：{{moment(user.last_seen).format('LL')}}</i></p>{% endif %}
-                        <p>发布文章数：{{ user.posts.count() }}</p>
-                        <p>粉丝数：{{ user.followers.count() }}</p>
+                        {% if user.last_seen %}<p><i>Last seen{{moment(user.last_seen).format('LL')}}</i></p>{% endif %}
+                        <p>Total Blogs posted：{{ user.posts.count() }}</p>
+                        <p>Total followers：{{ user.followers.count() }}</p>
                     </td>
                 </tr>
             </table>

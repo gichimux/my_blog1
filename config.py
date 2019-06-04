@@ -19,7 +19,8 @@ class Config:
     POSTS_PER_PAGE = 8
     COMMENTS_PER_PAGE = 5
     FOLLOWERS_PER_PAGE = 5
-
+    ADMINMAIL = os.environ.get('MAIL_USERNAME')
+    MESSAGES_PER_PAGE=5
 
 class ProdConfig(Config):
     '''
