@@ -3,19 +3,6 @@ from . import api
 from ..models import User, Post
 
 
-"""
-API资源：
-    资源URL ---- 方法 ---- 说明
-    -------------------------------
-    /users/<int:id> ---- GET ---- 一个用户
-    /users/<int:id>/posts/ ---- GET ---- 一个用户发布的博客文章
-    /users/<int:id>/timeline/ ---- GET ---- 一个用户所关注用户发布的文章
-    /posts/ ---- GET、POST ---- 所有博客文章
-    /posts/<int:id> ---- GET、PUT ---- 一篇博客文章
-    /posts/<int:id>/comments/ ---- GET、POST ---- 一篇博客文章中的评论
-    /comments/ ---- GET ---- 所有评论
-    /comments/<int:id> ---- GET ---- 一篇评论
-"""
 
 @api.route('/users/<int:id>')
 def get_user(id):

@@ -1,6 +1,7 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, request, abort, make_response, g, current_app
 from flask_login import current_user, login_required
+# from ..requests import get_quote
 
 from .. import db
 from . import main
@@ -20,6 +21,7 @@ def before_request():
 @main.route('/')
 @main.route('/index')
 def index():
+    # random_quote = get_quote()   
     notice = Admin.query.order_by(Admin.timestamp.desc()).first()
     if notice:
         notice=notice.notice
@@ -35,6 +37,7 @@ def index():
                            posts=posts,
                            notice=notice,
                            pagination=pagination)
+                        #    quote = random_quote)
 
 @main.route('/user/<nickname>')
 # @login_required
@@ -59,6 +62,7 @@ def edit_profile():
         current_user.nickname = form.nickname.data
         current_user.about_me = form.about_me.data
         db.session.add(current_user)
+        db.session.commit()
         flash('Profile edited!')
         return redirect(url_for('main.users',nickname=current_user.nickname))
     else:
@@ -194,6 +198,7 @@ def reply(id):
                                 reply_to=comment.author.nickname,
                                 author=current_user._get_current_object())
         db.session.add(reply_comment)
+        db.session.commit()
         flash('your reply has been published')
         return redirect(url_for('main.post', id=comment.post_id, page=page))
     return render_template('user/reply.html',
@@ -235,10 +240,12 @@ def edit(id):
         if post.draft == True:
             if 'save_draft' in request.form and form.validate():
                 db.session.add(post)
+                db.session.commit()
                 flash('Draft Saved！')
             elif 'submit' in request.form and form.validate():
                 post.draft = False
                 db.session.add(post)
+                db.session.commit()
                 flash('Succesfully submited')
             return redirect(url_for('main.edit', id=post.id))
         else:

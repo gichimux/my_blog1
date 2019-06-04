@@ -18,7 +18,15 @@ class Follow(db.Model):
     unread = db.Column(db.Boolean, default=True)
     timestamp = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
-
+class Quote:
+    '''
+    class to define quote objects
+    '''
+    def __init__(self,id,author,quote):
+        self.id = id
+        self.author = author
+        self.quote = quote
+    
 class User(UserMixin,db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)

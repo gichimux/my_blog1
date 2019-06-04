@@ -11,7 +11,7 @@ class ProfileForm(FlaskForm):
 class PostForm(FlaskForm):
     body = TextAreaField('Post', validators=[DataRequired()])
     title = StringField('Title', validators=[Length(1, 20)])
-    save_draft = SubmitField('Submit')
+    save_draft = SubmitField('Save Draft')
     submit = SubmitField('Publish')
 
 class EditpostForm(FlaskForm):
@@ -19,7 +19,7 @@ class EditpostForm(FlaskForm):
     body = TextAreaField('Post', validators=[DataRequired()])
     update = SubmitField('Update')
     submit = SubmitField('Submit')
-    save_draft = SubmitField('Submit')
+    save_draft = SubmitField('Save Draft')
 
 class CommentForm(FlaskForm):
     body = PageDownField('Comment', validators=[DataRequired()])

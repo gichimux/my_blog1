@@ -4,7 +4,7 @@ class Config:
     '''
     general configuration parent class
     '''
-
+    QUOTES_API_BASE_URL = 'http://quotes.stormconsultancy.co.uk/random.json'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://gichimu:trio.com@localhost/flask_blog_1'
     SECRET_KEY = "secret key"

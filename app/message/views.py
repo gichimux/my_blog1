@@ -175,6 +175,7 @@ def write_letter(id):
                                     letter=letter,
                                     unread=True)
         db.session.add(conversation)
+        db.session.commit()
         flash('Message sent')
         return redirect(url_for('message.write_letter',id=id))
     return render_template('message/conversation.html',
