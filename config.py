@@ -43,7 +43,7 @@ class DevConfig(Config):
 
 # class TestConfig(Config):
     
-#     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://vincent:Empharse333@localhost/pitch2_test'
+#     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://vincent:Empharse333@localhost/flask_test'
 
 
 config_options ={
